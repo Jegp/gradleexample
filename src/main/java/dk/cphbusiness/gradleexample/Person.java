@@ -54,5 +54,9 @@ public class Person {
     public void setEfternavn(String efternavn) {
         this.efternavn = efternavn;
     }
-    
+
+    @Override
+    public String toString() {
+        return String.format("Person[%d] %s %s", id, fornavn, efternavn);
+    }
 }

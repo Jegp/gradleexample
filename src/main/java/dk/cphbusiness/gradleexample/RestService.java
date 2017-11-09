@@ -23,4 +23,27 @@ public class RestService {
     public String hello() {
         return "Hello World";
     }
+
+    @GET
+    @Path("user")
+    public String user() {
+        try {
+            return JpaMain.getManager().createQuery("SELECT p FROM Person p", Person.class).getResultList().toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+    @GET
+    @Path("store")
+    public String store() {
+        Person p = new Person("John", "Doe");
+        JpaMain.getManager().getTransaction().begin();
+        JpaMain.getManager().persist(p);
+        JpaMain.getManager().getTransaction().commit();
+
+        return p.getId() + "";
+    }
+
 }
